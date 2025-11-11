@@ -1,5 +1,5 @@
 #!bin/bash
 
-sudo composer -update; composer upgrade; composer du -o
+composer install --no-dev --no-progress -a
 
-sudo service nginx reload
+service nginx reaload

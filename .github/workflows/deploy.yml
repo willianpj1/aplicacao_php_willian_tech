@@ -1,34 +1,34 @@
-name: "deploy para VPS"
+name: "Deploy para VPS"
 
 on:
   push:
-    branches:
+    branches: 
       - main
-
 jobs:
   build:
-    runs-on: ubunto-latest
+    runs-on: ubuntu-latest
 
     steps:
-      - name: "baixar o codigo"
-        uses: action/chekout@v4
+      - name: "Baixar o código" 
+        uses: actions/checkout@v4
 
       - name: "Copiar arquivos para VPS"
         uses: appleboy/scp-action@v1
         with:
-        host: "82.25.74.36"
-        username: "root"
-        key: ${{secrets.SERVER_SSH_KEY}}
-        source: "."
-        target: "/home/willian."
-
-      - name: "buid da aplicação"
+          host: "82.25.74.36"
+          username: "root"
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          source: "."
+          target: "/home/willian"
+        
+      - name: "Build da aplicação"
         uses: appleboy/ssh-action@v1
         with:
           host: "82.25.74.36"
           username: "root"
-          key: ${{secrets.SERVER_SSH_KEY}}
+          key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            cd /home/willian.
-            composer install --no-dev --no-progress -a
+            cd /home/willian
+            dos2unix runproject.sh
+            sudo bash runproject.sh
             chown -R www-data:www-data .
