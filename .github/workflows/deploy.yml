@@ -4,31 +4,31 @@ on:
   push:
     branches:
       - main
+
 jobs:
   build:
     runs-on: ubunto-latest
 
     steps:
-      - name:
+      - name: "baixar o codigo"
         uses: action/chekout@v4
 
-        -name: "Copiar arquivos para VPS"
+      - name: "Copiar arquivos para VPS"
         uses: appleboy/scp-action@v1
         with:
-          host: "82.25.74.36"
-          username: "root"
-          key: ${{secret.SERVER_SSH_KEY}}
-          source: "."
-          target: "/home/willian"
-
+        host: "82.25.74.36"
+        username: "root"
+        key: ${{secrets.SERVER_SSH_KEY}}
+        source: "."
+        target: "/home/willian."
 
       - name: "buid da aplicação"
         uses: appleboy/ssh-action@v1
         with:
           host: "82.25.74.36"
           username: "root"
-          key: ${{secret.SERVER_SSH_KEY}}
+          key: ${{secrets.SERVER_SSH_KEY}}
           script: |
-            cd /home/willian
+            cd /home/willian.
             composer install --no-dev --no-progress -a
-            chown -R www-data:www-data 
+            chown -R www-data:www-data .

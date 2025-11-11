@@ -514,6 +514,7 @@ class ComposerStaticInit2a4aa7dd4ddb86da09e7c7873127242d
         'Twig\\Util\\TemplateDirIterator' => __DIR__ . '/..' . '/twig/twig/src/Util/TemplateDirIterator.php',
         'app\\controller\\Base' => __DIR__ . '/../..' . '/app/controller/Base.php',
         'app\\controller\\Cliente' => __DIR__ . '/../..' . '/app/controller/Cliente.php',
+        'app\\controller\\Customer' => __DIR__ . '/../..' . '/app/controller/Customer.php',
         'app\\controller\\Home' => __DIR__ . '/../..' . '/app/controller/Home.php',
         'app\\controller\\User' => __DIR__ . '/../..' . '/app/controller/User.php',
         'app\\database\\Connection' => __DIR__ . '/../..' . '/app/database/Connection.php',

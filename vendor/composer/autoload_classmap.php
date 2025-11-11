@@ -407,6 +407,7 @@ return array(
     'Twig\\Util\\TemplateDirIterator' => $vendorDir . '/twig/twig/src/Util/TemplateDirIterator.php',
     'app\\controller\\Base' => $baseDir . '/app/controller/Base.php',
     'app\\controller\\Cliente' => $baseDir . '/app/controller/Cliente.php',
+    'app\\controller\\Customer' => $baseDir . '/app/controller/Customer.php',
     'app\\controller\\Home' => $baseDir . '/app/controller/Home.php',
     'app\\controller\\User' => $baseDir . '/app/controller/User.php',
     'app\\database\\Connection' => $baseDir . '/app/database/Connection.php',
