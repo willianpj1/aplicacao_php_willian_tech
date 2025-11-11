@@ -28,7 +28,5 @@ jobs:
           username: "root"
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            cd /home/willian
-            dos2unix runproject.sh
-            sudo bash runproject.sh
+            cd /home/willian            
             chown -R www-data:www-data .
