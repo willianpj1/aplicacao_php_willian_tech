@@ -11,7 +11,7 @@ class User extends Base
             'titulo' => 'Lista de usuário'
         ];
         return $this->getTwig()
-            ->render($response, $this->setView('listuser'), $dadosTemplate)
+            ->render($response, $this->setView('listauser'), $dadosTemplate)
             ->withHeader('Content-Type', 'text/html')
             ->withStatus(200);
     }

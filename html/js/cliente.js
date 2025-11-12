@@ -1,3 +1,4 @@
+import { Requests } from "./Requests.js";
 import { Validate } from "./Validate.js";
 
 const InsertButton = document.getElementById('insert');
@@ -9,6 +10,8 @@ $('#tel').inputmask({ "mask": ["(99) 9999-9999", "(99) 99999-9999"] });
 InsertButton.addEventListener('click', async () => {
     const IsValid = Validate
         .SetForm('form')
-        .Valid();
+        .Validate();
 
+    const response = await Requests.SetForm('form').Post('/cliente/insert');
+    console.log(response);
 });

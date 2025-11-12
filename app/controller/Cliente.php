@@ -2,7 +2,68 @@
 
 namespace app\controller;
 
+use app\database\builder\InsertQuery;
+use app\database\builder\DeleteQuery;
+
 class Cliente extends Base
+{
+
+    public function lista($request, $response)
+    {
+        try {
+            $dadosTemplate = [
+                'titulo' => 'Lista de Cliente'
+            ];
+            return $this->getTwig()
+                ->render($response, $this->setView('listacliente'), $dadosTemplate)
+                ->withHeader('Content-Type', 'text/html')
+                ->withStatus(200);
+        } catch (\Exception $e) {
+        }
+    }
+    public function cadastro($request, $response)
+    {
+        try {
+            $dadosTemplate = [
+                'titulo' => 'Cadastro de Cliente'
+            ];
+            return $this->getTwig()
+                ->render($response, $this->setView('cliente'), $dadosTemplate)
+                ->withHeader('Content-Type', 'text/html')
+                ->withStatus(200);
+        } catch (\Exception $e) {
+        }
+    }
+    public function insert($request, $response)
+    {
+
+        try {
+            $nome = $_POST['nome'];
+            $sobrenome = $_POST['sobrenome'];
+            $cpf = $_POST['cpf'];
+            $rg = $_POST['rg'];
+
+            $FieldsAndValues = [
+                'nome_fantasia' => $nome,
+                'sobrenome_razao' => $sobrenome,
+                'cpf_cnpj' => $cpf,
+                're_ie' => $rg
+            ];
+
+            $IsSave = InsertQuery::table('cliente')->save($FieldsAndValues);
+
+            if (!$IsSave) {
+                echo 'Erro ao salvar';
+                die;
+            }
+            echo "Salvo com sucesso!";
+            die;
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
+}
+/*class Cliente extends Base
 {
     public function lista($request, $response)
     {
@@ -25,4 +86,4 @@ class Cliente extends Base
             ->withHeader('Content-Type', 'text/html')
             ->withStatus(200);
     }
-}
+}*/
