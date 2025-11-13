@@ -1,11 +1,12 @@
 import { Validate } from "./Validate.js";
-
-const InsertButton = document.getElementById('insert');
+import { Requests } from "./Requests.js";
+const Salvar = document.getElementById('salvar');
 
 $('#cpf').inputmask({ "mask": ["999.999.999-99", "99.999.999/9999-99"] });
+$('#tel').inputmask({ "mask": ["(99) 99999-9999"] });
 
-InsertButton.addEventListener('click', async () => {
-    const IsValid = Validate
-        .SetForm('form')
-        .Validate();
+Salvar.addEventListener('click', async () => {
+    Validate.SetForm('form').Validate();
+    const response = await Requests.SetForm('form').Post('/usuario/insert');
+    console.log(response);
 });
