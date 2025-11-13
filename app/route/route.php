@@ -3,7 +3,6 @@
 use app\controller\Cliente;
 use app\controller\User;
 use app\controller\Home;
-use app\controller\Customer;
 use Slim\Routing\RouteCollectorProxy;
 
 $app->get('/', Home::class . ':home');
@@ -18,4 +17,5 @@ $app->group('/cliente', function (RouteCollectorProxy $group) {
     $group->get('/lista', Cliente::class . ':lista');
     $group->get('/cadastro', Cliente::class . ':cadastro');
     $group->post('/insert', Cliente::class . ':insert');
+    $group->post('/delete', Cliente::class . ':delete');
 });

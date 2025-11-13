@@ -62,7 +62,29 @@ class Cliente extends Base
             //throw $th;
         }
     }
+     public function delete($request, $response)
+    {
+        try {
+            $id = $_POST['id'];
+            $IsDelete = DeleteQuery::table('cliente')
+                ->where('id', '=', $id)
+                ->delete();
+
+            if (!$IsDelete) {
+                echo 'Erro ao deletar';
+                die;
+            }
+            echo "Deletado com sucesso!";
+            die;
+        } catch (\Throwable $th) {
+            echo "Erro: " . $th->getMessage();
+            die;
+        }
+    }
 }
+
+
+
 /*class Cliente extends Base
 {
     public function lista($request, $response)
