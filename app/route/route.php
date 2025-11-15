@@ -12,8 +12,8 @@ $app->get('/home', Home::class . ':home');
 $app->group('/usuario', function (RouteCollectorProxy $group) {
     $group->get('/lista', User::class . ':lista');
     $group->get('/cadastro', User::class . ':cadastro');
-    $group->get('/insert', User::class . ':insert');
-    $group->get('/delete', User::class . ':delete');
+    $group->post('/insert', User::class . ':insert');
+    $group->post('/delete', User::class . ':delete');
 });
 $app->group('/cliente', function (RouteCollectorProxy $group) {
     $group->get('/lista', Cliente::class . ':lista');

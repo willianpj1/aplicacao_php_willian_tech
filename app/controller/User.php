@@ -42,14 +42,17 @@ class User extends Base
             $sobrenome = $_POST['sobrenome'];
             $cpf = $_POST['cpf'];
             $rg = $_POST['rg'];
+            $senha = $_POST['password'];
 
             $FieldsAndValues = [
-                'nome_fantasia' => $nome,
-                'sobrenome_razao' => $sobrenome,
-                'cpf_cnpj' => $cpf,
-                're_ie' => $rg
-            ];
 
+                'nome' => $nome,
+                'sobrenome' => $sobrenome,
+                'senha' => $senha,
+                'cpf' => $cpf,
+                'rg' => $rg 
+            ];
+            
             $IsSave = InsertQuery::table('usuario')->save($FieldsAndValues);
 
             if (!$IsSave) {
@@ -62,7 +65,7 @@ class User extends Base
             //throw $th;
         }
     }
-     public function delete($request, $response)
+    public function delete($request, $response)
     {
         try {
             $id = $_POST['id'];
@@ -82,30 +85,3 @@ class User extends Base
         }
     }
 }
-
-
-
-/*class Cliente extends Base
-{
-    public function lista($request, $response)
-    {
-
-        $dadosTemplate = [
-            'titulo' => 'Lista de Cliente'
-        ];
-        return $this->getTwig()
-            ->render($response, $this->setView('listacliente'), $dadosTemplate)
-            ->withHeader('Content-Type', 'text/html')
-            ->withStatus(200);
-    }
-    public function cadastro($request, $response)
-    {
-        $dadosTemplate = [
-            'titulo' => 'Cadastro de Cliente'
-        ];
-        return $this->getTwig()
-            ->render($response, $this->setView('cliente'), $dadosTemplate)
-            ->withHeader('Content-Type', 'text/html')
-            ->withStatus(200);
-    }
-}*/

@@ -1,6 +1,6 @@
 import { Validate } from "./Validate.js";
 import { Requests } from "./Requests.js";
-const Salvar = document.getElementById('salvar');
+const Salvar = document.getElementById('insert');
 
 $('#cpf').inputmask({ "mask": ["999.999.999-99", "99.999.999/9999-99"] });
 $('#tel').inputmask({ "mask": ["(99) 99999-9999"] });

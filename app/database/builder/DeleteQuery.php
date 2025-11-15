@@ -19,7 +19,7 @@ class DeleteQuery
     #operator Operador lógico (=, >, <, etc.).
     #string|int $value Valor a ser comparado.
     #logic Operador lógico adicional (AND, OR). Pode ser nulo.
-    public function where(string $field, string $operator, string|int $value, ?string $logic = null)
+    public function where(string $field, string $operator, string|int $value, ?string $logic = null): ?self
     {
         # Define um placeholder baseado no nome do campo
         $placeHolder = '';

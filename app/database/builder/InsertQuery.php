@@ -31,6 +31,7 @@ class InsertQuery
     {
         $this->FieldsAndValues = $FieldsAndValues;
         $query = $this->createQuery();
+        var_dump($query, $this->FieldsAndValues);
         try {
             return $this->execute($query);
         } catch (\PDOException $e) {
