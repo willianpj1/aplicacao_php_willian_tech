@@ -1,5 +1,7 @@
-<?php 
+<?php
+
 namespace app\database\builder;
+use app\database\builder;
 
 class SelectQuery
 {
@@ -22,7 +24,7 @@ class SelectQuery
         $this->table = $table;
         return $this;
     }
-    public function where(string $field, string $operator, string | int $value, ?string $logic):self
+    public function where(string $field, string $operator, string | int $value, ?string $logic = null): self
     {
         $placeholder = '';
         $placeholder = $field;
@@ -35,12 +37,12 @@ class SelectQuery
         $this->binds[$placeholder] = $value;
         return $this;
     }
-    public function order (string $field, string $typeOrder = 'asc'): self
+    public function order(string $field, string $typeOrder = 'asc'): self
     {
         $this->order = "order by {$field} {$typeOrder}";
         return $this;
     }
-     public function createQuery()
+    public function createQuery()
     {
         if (!$this->fields) {
             throw new \Exception("Por favor informe os campos a serem selecionados na consulta");
@@ -64,5 +66,30 @@ class SelectQuery
         $this->limits = " limit {$this->limit} offset {$this->offset}";
         return $this;
     }
-    
+    public function fetch()
+    {
+        $query = '';
+        $query = $this->createQuery();
+        try {
+            $connection = Connection::connection();
+            $prepare = $connection->prepare($query);
+            $prepare->execute($this->bind ?? []);
+            return $prepare->fetch(\PDO::FETCH_ASSOC);
+        } catch (\Exception $e) {
+            throw new \Exception("Restrição: " . $e->getMessage());
+        }
+    }
+    public function fetchAll()
+    {
+        $query = '';
+        $query = $this->createQuery();
+        try {
+            $connection = Connection::connection();
+            $prepare = $connection->prepare($query);
+            $prepare->execute($this->bind ?? []);
+            return $prepare->fetchAll(\PDO::FETCH_ASSOC);
+        } catch (\Exception $e) {
+            throw new \Exception("Restrição: " . $e->getMessage());
+        }
+    }
 }

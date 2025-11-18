@@ -4,6 +4,7 @@ namespace app\controller;
 
 use app\database\builder\InsertQuery;
 use app\database\builder\DeleteQuery;
+use app\database\builder\SelectQuery;
 
 class User extends Base
 {
@@ -50,9 +51,9 @@ class User extends Base
                 'sobrenome' => $sobrenome,
                 'senha' => $senha,
                 'cpf' => $cpf,
-                'rg' => $rg 
+                'rg' => $rg
             ];
-            
+
             $IsSave = InsertQuery::table('usuario')->save($FieldsAndValues);
 
             if (!$IsSave) {
@@ -64,6 +65,77 @@ class User extends Base
         } catch (\Throwable $th) {
             //throw $th;
         }
+    }
+    public function listuser($request, $response)
+    {
+        #Captura todas a variaveis de forma mais segura VARIAVEIS POST.
+        $form = $request->getParsedBody();
+
+        #Qual a coluna da tabela deve ser ordenada.
+        $order = $form['order'][0]['column'];
+
+        #Tipo de ordenação
+        $orderType = $form['order'][0]['dir'];
+
+        #Em qual registro se inicia o retorno dos registro, OFFSET
+        $form['start'];
+
+        #Limite de registro a serem retornados do banco de dados LIMIT
+        $form['length'];
+
+        #O termo pesquisado
+        $term = $form['search']['value'];
+
+        $query = SelectQuery::select('id,nome,sobrenome')->from('usuario');
+
+        /*if (!is_null($term) && ($term !== '')) {
+            $query->where('usuario.nome', 'ilike', "{%$term%}", 'or')
+                ->where('sobrenome', 'ilike', "{%$term%}");
+        }*/
+        $users = $query->fetchAll();
+        
+        $userData = [];
+        foreach ($users as $key => $value) {
+            $userData[$key] = [
+                $value['id'],
+                $value['nome'],
+                $value['sobrenome'], 
+                "<button class='btn btn-danger'>Excluir</button>
+            <button class='btn btn-primary'>Editar</button>"
+            ];
+        }
+            'status' => true,
+            'recordsTotal' => 2,
+            'recordsFiltered' => 2,
+            'data' => [[
+                1,
+                'João',
+                'Silva',
+                "<button class='btn btn-danger'>Excluir</button>
+                <button class='btn btn-primary'>Editar</button>"
+            ]]
+        ];
+        $payload = json_encode($data);
+
+        $response->getBody()->write($payload);
+
+        return $response
+            ->withHeader('Content-Type', 'application/json')
+            ->withStatus(200);
+
+        var_dump($from);
+        /*
+        order[0][column]
+        order[0][dir]
+        order[0][name]
+        start
+        length
+        search[value]
+*/
+
+
+        echo 'oi';
+        die;
     }
     public function delete($request, $response)
     {
