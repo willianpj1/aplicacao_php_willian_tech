@@ -44,13 +44,13 @@ class Cliente extends Base
             $rg = $_POST['rg'];
 
             $FieldsAndValues = [
-                'nome_fantasia' => $nome,
-                'sobrenome_razao' => $sobrenome,
-                'cpf_cnpj' => $cpf,
-                're_ie' => $rg
+                'nome' => $nome,
+                'sobrenome' => $sobrenome,
+                'cpf' => $cpf,
+                'rg' => $rg
             ];
 
-            $IsSave = InsertQuery::table('cliente')->save($FieldsAndValues);
+            $IsSave = InsertQuery::table('user')->save($FieldsAndValues);
 
             if (!$IsSave) {
                 echo 'Erro ao salvar';
