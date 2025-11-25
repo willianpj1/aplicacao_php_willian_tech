@@ -1,6 +1,7 @@
 <?php
 
 namespace app\database\builder;
+
 use app\database\Connection;
 
 class SelectQuery
@@ -32,23 +33,30 @@ class SelectQuery
         if (str_contains($placeholder, '.')) {
             $placeholder = substr($field, strpos($field, '.') + 1);
         }
-
-        $this->where[] = "{$field} {$operator} :{$placeholder} {$logic}";
+        $this->where[] = "{$field}  {$operator} :{$placeholder} {$logic}";
         $this->binds[$placeholder] = $value;
         return $this;
     }
     public function order(string $field, string $typeOrder = 'asc'): self
     {
-        $this->order = "order by {$field} {$typeOrder}";
+        $this->order = " order by {$field}  {$typeOrder}";
         return $this;
     }
-    public function createQuery()
+
+    public function limit(int $limit, int $offset = 0): self
+    {
+        $this->limit = $limit;
+        $this->offset = $offset;
+        $this->limits = " limit {$this->limit} offset {$this->offset} ";
+        return $this;
+    }
+    private function createQuery(): string
     {
         if (!$this->fields) {
-            throw new \Exception("Por favor informe os campos a serem selecionados na consulta");
+            throw new \Exception("Para realizar uma consulta SQL é necessário informa os campos da consulta");
         }
         if (!$this->table) {
-            throw new \Exception("Por favor informe o nome da tabela");
+            throw new \Exception("Para realizar a consulta SQL é necessário informa a nome da tabela.");
         }
         $query = '';
         $query = 'select ';
@@ -58,13 +66,6 @@ class SelectQuery
         $query .= $this->order ?? '';
         $query .= $this->limits ?? '';
         return $query;
-    }
-    public function limit(int $limit, int $offset): ?self
-    {
-        $this->limit = $limit;
-        $this->offset = $offset;
-        $this->limits = " limit {$this->limit} offset {$this->offset}";
-        return $this;
     }
     public function fetch()
     {

@@ -9,4 +9,19 @@ Salvar.addEventListener('click', async () => {
     Validate.SetForm('form').Validate();
     const response = await Requests.SetForm('form').Post('/usuario/insert');
     console.log(response);
+    if (!response.status) {
+        Swal.fire({
+            icon: "error",
+            title: "Eita patrão!",
+            text: response.msg,
+        });
+        return
+    }
+
+    Swal.fire({
+        title: "Cadastro realizado com sucesso!",
+        icon: "success",
+        draggable: true
+    });
+
 });
