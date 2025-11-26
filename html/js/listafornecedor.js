@@ -17,13 +17,13 @@ const tabela = new $('#tabela').DataTable({
         searchPlaceholder: 'Digite sua pesquisa...',
     },
     ajax: {
-        url: '/usuario/listuser',
+        url: '/fornecedor/listafornecedor',
         type: 'POST'
     }
 });
 async function Delete(id) {
     document.getElementById('id').value = id;
-    const response = await Requests.SetForm('form').Post('/usuario/delete');
+    const response = await Requests.SetForm('form').Post('/fornecedor/delete');
     if (!response.status) {
         Swal.fire({
             title: "Erro ao remover!",

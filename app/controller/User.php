@@ -4,6 +4,7 @@ namespace app\controller;
 
 use app\database\builder\SelectQuery;
 use app\database\builder\InsertQuery;
+use app\database\builder\DeleteQuery;
 
 class User extends Base
 {
@@ -116,7 +117,7 @@ class User extends Base
                 $value['cpf'],
                 $value['rg'],
                 "<button class='btn btn-warning'>Editar</button>
-                <button class='btn btn-danger'>Excluir</button>"
+                <button type='button'  onclick='Delete(" . $value['id'] . ");' class='btn btn-danger'>Excluir</button>"
             ];
         }
         $data = [
@@ -132,10 +133,24 @@ class User extends Base
         return $response
             ->withHeader('Content-Type', 'application/json')
             ->withStatus(200);
+    }
+    public function delete($request, $response)
+    {
+        try {
+            $id = $_POST['id'];
+            $IsDelete = DeleteQuery::table('usuario')
+                ->where('id', '=', $id)
+                ->delete();
 
-
-        /*
-
-*/
+            if (!$IsDelete) {
+                echo json_encode(['status' => false, 'msg' => $IsDelete, 'id' => $id]);
+                die;
+            }
+            echo json_encode(['status' => true, 'msg' => 'Removido com sucesso!', 'id' => $id]);
+            die;
+        } catch (\Throwable $th) {
+            echo "Erro: " . $th->getMessage();
+            die;
+        }
     }
 }

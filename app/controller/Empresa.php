@@ -6,16 +6,16 @@ use app\database\builder\SelectQuery;
 use app\database\builder\InsertQuery;
 use app\database\builder\DeleteQuery;
 
-class Cliente extends Base
+class Empresa extends Base
 {
 
     public function lista($request, $response)
     {
         $dadosTemplate = [
-            'titulo' => 'Lista de Cliente'
+            'titulo' => 'Lista de empresa'
         ];
         return $this->getTwig()
-            ->render($response, $this->setView('listacliente'), $dadosTemplate)
+            ->render($response, $this->setView('listaempresa'), $dadosTemplate)
             ->withHeader('Content-Type', 'text/html')
             ->withStatus(200);
     }
@@ -48,7 +48,7 @@ class Cliente extends Base
                 echo json_encode(['status' => false, 'msg' => 'Por favor informe o rg!', 'id' => 0]);
                 die;
             }
-            $IsSave = InsertQuery::table('cliente')->save($FieldsAndValues);
+            $IsSave = InsertQuery::table('empresa')->save($FieldsAndValues);
 
             if (!$IsSave) {
                 echo json_encode(['status' => false, 'msg' => $IsSave, 'id' => 0]);
@@ -63,14 +63,14 @@ class Cliente extends Base
     public function cadastro($request, $response)
     {
         $dadosTemplate = [
-            'titulo' => 'Cadastro de Cliente'
+            'titulo' => 'Cadastro de empresa'
         ];
         return $this->getTwig()
-            ->render($response, $this->setView('cliente'), $dadosTemplate)
+            ->render($response, $this->setView('empresa'), $dadosTemplate)
             ->withHeader('Content-Type', 'text/html')
             ->withStatus(200);
     }
-    public function listacliente($request, $response)
+    public function listaempresa($request, $response)
     {
         #Captura todas a variaveis de forma mais segura VARIAVEIS POST.
         $form = $request->getParsedBody();
@@ -93,22 +93,24 @@ class Cliente extends Base
         $orderField = $fields[$order];
         #O termo pesquisado
         $term = $form['search']['value'];
-        $query = SelectQuery::select('id,nome_fantasia,sobrenome_razao,cpf_cnpj,rg_ie')->from('cliente');
+        $query = SelectQuery::select('id,nome_fantasia,sobrenome_razao,cpf_cnpj,rg_ie')->from('empresa');
         if (!is_null($term) && ($term !== '')) {
-            $query->where('cliente.nome_fantasia', 'ilike', "%{$term}%", 'or')
-                ->where('cliente.sobrenome_razao', 'ilike', "%{$term}%", 'or')
-                ->where('cliente.cpf_cnpj', 'ilike', "%{$term}%", 'or')
-                ->where('cliente.rg_ie', 'ilike', "%{$term}%");
+            $query->where('empresa.nome_fantasia', 'ilike', "%{$term}%", 'or')
+                ->where('empresa.sobrenome_razao', 'ilike', "%{$term}%", 'or')
+                ->where('empresa.cpf_cnpj', 'ilike', "%{$term}%", 'or')
+                ->where('empresa.rg_ie', 'ilike', "%{$term}%");
         }
+
         if (!is_null($order) && ($order !== '')) {
             $query->order($orderField, $orderType);
         }
-        $clientes = $query
+        $empresas = $query
+
             ->limit($length, $start)
             ->fetchAll();
-        $clienteData = [];
-        foreach ($clientes as $key => $value) {
-            $clienteData[$key] = [
+        $empresaData = [];
+        foreach ($empresas as $key => $value) {
+            $empresaData[$key] = [
                 $value['id'],
                 $value['nome_fantasia'],
                 $value['sobrenome_razao'],
@@ -120,9 +122,9 @@ class Cliente extends Base
         }
         $data = [
             'status' => true,
-            'recordsTotal' => count($clientes),
-            'recordsFiltered' => count($clientes),
-            'data' => $clienteData
+            'recordsTotal' => count($empresas),
+            'recordsFiltered' => count($empresas),
+            'data' => $empresaData
         ];
         $payload = json_encode($data);
 
@@ -136,7 +138,7 @@ class Cliente extends Base
     {
         try {
             $id = $_POST['id'];
-            $IsDelete = DeleteQuery::table('cliente')
+            $IsDelete = DeleteQuery::table('empresa')
                 ->where('id', '=', $id)
                 ->delete();
 
