@@ -7,7 +7,7 @@ $('#tel').inputmask({ "mask": ["(99) 99999-9999"] });
 
 Salvar.addEventListener('click', async () => {
     Validate.SetForm('form').Validate();
-    const response = await Requests.SetForm('form').Post('/cliente/insert');
+    const response = await Requests.SetForm('form').Post('/empresa/insert');
     console.log(response);
     if (!response.status) {
         Swal.fire({
