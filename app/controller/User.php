@@ -11,6 +11,7 @@ class User extends Base
 
     public function lista($request, $response)
     {
+        
         $dadosTemplate = [
             'titulo' => 'Lista de usuário'
         ];
@@ -74,7 +75,7 @@ class User extends Base
             ->withStatus(200);
     }
     public function listuser($request, $response)
-    {
+    {        
         #Captura todas a variaveis de forma mais segura VARIAVEIS POST.
         $form = $request->getParsedBody();
         #Qual a coluna da tabela deve ser ordenada.

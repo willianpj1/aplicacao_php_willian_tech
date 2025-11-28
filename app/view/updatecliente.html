@@ -1,0 +1,51 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    Launch static backdrop modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <form class="row g-3 needs-validation" id="form">
+                        <div class="col-md-4">
+                            <label for="nome" class="form-label">Nome</label>
+                            <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite seu nome."
+                                required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="sobrenome" class="form-label">Sobrenome</label>
+                            <input type="text" class="form-control" id="sobrenome" name="sobrenome"
+                                placeholder="Por favor digite seu sobre nome" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="cpf" class="form-label">CPF/CNPJ</label>
+                            <input type="text" class="form-control" id="cpf" name="cpf"
+                                placeholder="Por favor digite seu CPF ou CNPJ" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="rg" class="form-label">RG/IE</label>
+                            <input type="text" class="form-control" id="rg" name="rg"
+                                placeholder="Por favor digite seu RG ou Inscrição Estadual" required>
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-primary" type="button" id="insert">Salvar</button>
+                            <a class="btn btn-primary" href="/cliente/lista" type="button">voltar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="Update" class="btn btn-sucess">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>

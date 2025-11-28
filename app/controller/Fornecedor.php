@@ -115,7 +115,7 @@ class Fornecedor extends Base
                 $value['sobrenome_razao'],
                 $value['cpf_cnpj'],
                 $value['rg_ie'],
-                "<button class='btn btn-warning'>Editar</button>
+                "<button type= 'button' onclick='Editarclass='btn btn-warning'>Editar</button>
                 <button type='button'  onclick='Delete(" . $value['id'] . ");' class='btn btn-danger'>Excluir</button>"
             ];
         }

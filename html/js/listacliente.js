@@ -49,4 +49,10 @@ async function Delete(id) {
     });
     tabela.ajax.reload();
 }
+async function Editar(id) {
+    document.getElementById('id').value = id;
+    $('#staticBackdrop').modal('show');
+    //const response = await Requests.SetForm('form').Post('/cliente/update');
+}
 window.Delete = Delete;
+window.Editar = Editar;
