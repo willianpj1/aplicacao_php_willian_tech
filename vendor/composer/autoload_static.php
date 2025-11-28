@@ -512,14 +512,10 @@ class ComposerStaticInit2a4aa7dd4ddb86da09e7c7873127242d
         'Twig\\Util\\DeprecationCollector' => __DIR__ . '/..' . '/twig/twig/src/Util/DeprecationCollector.php',
         'Twig\\Util\\ReflectionCallable' => __DIR__ . '/..' . '/twig/twig/src/Util/ReflectionCallable.php',
         'Twig\\Util\\TemplateDirIterator' => __DIR__ . '/..' . '/twig/twig/src/Util/TemplateDirIterator.php',
-        'app\\controller\\Base' => __DIR__ . '/../..' . '/app/controller/Base.php',
         'app\\controller\\Cliente' => __DIR__ . '/../..' . '/app/controller/Cliente.php',
-        'app\\controller\\Customer' => __DIR__ . '/../..' . '/app/controller/Customer.php',
-        'app\\controller\\Home' => __DIR__ . '/../..' . '/app/controller/Home.php',
+        'app\\controller\\Empresa' => __DIR__ . '/../..' . '/app/controller/Empresa.php',
+        'app\\controller\\Fornecedor' => __DIR__ . '/../..' . '/app/controller/Fornecedor.php',
         'app\\controller\\User' => __DIR__ . '/../..' . '/app/controller/User.php',
-        'app\\database\\Connection' => __DIR__ . '/../..' . '/app/database/Connection.php',
-        'app\\database\\builder\\DeleteQuery' => __DIR__ . '/../..' . '/app/database/builder/DeleteQuery.php',
-        'app\\database\\builder\\InsertQuery' => __DIR__ . '/../..' . '/app/database/builder/InsertQuery.php',
         'app\\trait\\Template' => __DIR__ . '/../..' . '/app/trait/Template.php',
     );
 
