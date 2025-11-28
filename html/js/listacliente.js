@@ -51,7 +51,7 @@ async function Delete(id) {
 }
 async function Editar(id) {
     document.getElementById('id').value = id;
-    $('#staticBackdrop').modal('show');
+    $('#editar').modal('show');
     //const response = await Requests.SetForm('form').Post('/cliente/update');
 }
 window.Delete = Delete;
