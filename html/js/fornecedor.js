@@ -6,7 +6,9 @@ $('#cpf').inputmask({ "mask": ["999.999.999-99", "99.999.999/9999-99"] });
 $('#tel').inputmask({ "mask": ["(99) 99999-9999"] });
 
 Salvar.addEventListener('click', async () => {
+    //valida todos os campos do fomrulario
     Validate.SetForm('form').Validate();
+
     const response = await Requests.SetForm('form').Post('/fornecedor/insert');
     console.log(response);
     if (!response.status) {
@@ -25,3 +27,23 @@ Salvar.addEventListener('click', async () => {
     });
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
