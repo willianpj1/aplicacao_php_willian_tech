@@ -1,73 +1,45 @@
+
 <?php
 
 namespace app\controller;
 
-use app\database\builder\SelectQuery;
 use app\database\builder\InsertQuery;
-use app\database\builder\DeleteQuery;
+use app\database\builder\SelectQuery;
+use app\database\builder\UpdateQuery;
 
 class User extends Base
 {
 
     public function lista($request, $response)
     {
-        
         $dadosTemplate = [
             'titulo' => 'Lista de usuário'
         ];
         return $this->getTwig()
-            ->render($response, $this->setView('listauser'), $dadosTemplate)
+            ->render($response, $this->setView('listuser'), $dadosTemplate)
             ->withHeader('Content-Type', 'text/html')
             ->withStatus(200);
-    }
-    public function insert($request, $response)
-    {
-
-        try {
-            $nome = $_POST['nome'];
-
-            $sobrenome = $_POST['sobrenome'];
-            $cpf = $_POST['cpf'];
-            $rg = $_POST['rg'];
-
-            $FieldsAndValues = [
-                'nome' => $nome,
-                'sobrenome' => $sobrenome,
-                'cpf' => $cpf,
-                'rg' => $rg
-            ];
-            if (is_null($nome) || $nome === '') {
-                echo json_encode(['status' => false, 'msg' => 'Por favor informe o nome!', 'id' => 0]);
-                die;
-            }
-            if (is_null($sobrenome) ||  $sobrenome === '') {
-                echo json_encode(['status' => false, 'msg' => 'Por favor informe o sobrenome!', 'id' => 0]);
-                die;
-            }
-            if (is_null($cpf) || $cpf === '') {
-                echo json_encode(['status' => false, 'msg' => 'Por favor informe o cpf!', 'id' => 0]);
-                die;
-            }
-            if (is_null($rg) || $rg === '') {
-                echo json_encode(['status' => false, 'msg' => 'Por favor informe o rg!', 'id' => 0]);
-                die;
-            }
-            $IsSave = InsertQuery::table('usuario')->save($FieldsAndValues);
-
-            if (!$IsSave) {
-                echo json_encode(['status' => false, 'msg' => $IsSave, 'id' => 0]);
-                die;
-            }
-            echo json_encode(['status' => true, 'msg' => 'Salvo com sucesso!', 'id' => 0]);
-            die;
-        } catch (\Throwable $th) {
-            //throw $th;
-        }
     }
     public function cadastro($request, $response)
     {
         $dadosTemplate = [
-            'titulo' => 'Cadastro de usuário'
+            'acao' => 'c',
+            'titulo' => 'Cadastro e alteracao de usuário'
+        ];
+        return $this->getTwig()
+            ->render($response, $this->setView('user'), $dadosTemplate)
+            ->withHeader('Content-Type', 'text/html')
+            ->withStatus(200);
+    }
+    public function alterar($request, $response, $args)
+    {
+        $id = $args['id'];
+        $user = SelectQuery::select()->from('usuario')->where('id', '=', $id)->fetch();
+        $dadosTemplate = [
+            'acao' => 'e',
+            'id' => $id,
+            'titulo' => 'Cadastro e alteracao de usuário',
+            'usuario' => $user
         ];
         return $this->getTwig()
             ->render($response, $this->setView('user'), $dadosTemplate)
@@ -75,7 +47,7 @@ class User extends Base
             ->withStatus(200);
     }
     public function listuser($request, $response)
-    {        
+    {
         #Captura todas a variaveis de forma mais segura VARIAVEIS POST.
         $form = $request->getParsedBody();
         #Qual a coluna da tabela deve ser ordenada.
@@ -90,23 +62,20 @@ class User extends Base
             0 => 'id',
             1 => 'nome',
             2 => 'sobrenome',
-            3 => 'cpf',
-            4 => 'rg'
+            3 => 'cpf'
         ];
         #Capturamos o nome do capo a ser ordenado.
         $orderField = $fields[$order];
         #O termo pesquisado
         $term = $form['search']['value'];
-        $query = SelectQuery::select('id,nome,sobrenome,cpf,rg')->from('usuario');
+        $query = SelectQuery::select('id,nome,sobrenome,cpf')->from('usuario');
         if (!is_null($term) && ($term !== '')) {
             $query->where('usuario.nome', 'ilike', "%{$term}%", 'or')
                 ->where('usuario.sobrenome', 'ilike', "%{$term}%", 'or')
                 ->where('usuario.cpf', 'ilike', "%{$term}%");
         }
-        if (!is_null($order) && ($order !== '')) {
-            $query->order($orderField, $orderType);
-        }
         $users = $query
+            ->order($orderField, $orderType)
             ->limit($length, $start)
             ->fetchAll();
         $userData = [];
@@ -116,9 +85,8 @@ class User extends Base
                 $value['nome'],
                 $value['sobrenome'],
                 $value['cpf'],
-                $value['rg'],
-                "<button class='btn btn-warning'>Editar</button>
-                <button type='button'  onclick='Delete(" . $value['id'] . ");' class='btn btn-danger'>Excluir</button>"
+                "<a href='/usuario/alterar/{$value['id']}' class='btn btn-warning'>Editar</a>
+                <button onclick='Delete({$value['id']})' class='btn btn-danger'>Excluir</button>"
             ];
         }
         $data = [
@@ -135,23 +103,88 @@ class User extends Base
             ->withHeader('Content-Type', 'application/json')
             ->withStatus(200);
     }
-    public function delete($request, $response)
+    public function insert($request, $response)
     {
         try {
-            $id = $_POST['id'];
-            $IsDelete = DeleteQuery::table('usuario')
-                ->where('id', '=', $id)
-                ->delete();
-
-            if (!$IsDelete) {
-                echo json_encode(['status' => false, 'msg' => $IsDelete, 'id' => $id]);
-                die;
+            $form = $request->getParsedBody();
+            $FieldAndValues = [
+                'nome' => $form['nome'],
+                'sobrenome' => $form['sobrenome'],
+                'cpf' => $form['cpf'],
+                'rg' => $form['rg'],
+                'data_nascimento' => $form['data_nascimento'],
+                'senha' => password_hash($form['senha'], PASSWORD_DEFAULT),
+                #'ativo' => (isset($form['ativo']) and $form['ativo'] === 'true') ? true : false,
+                #'administrador' => (isset($form['administrador']) and $form['administrador'] === 'true') ? true : false
+            ];
+            $IsInsert = InsertQuery::table('usuario')->save($FieldAndValues);
+            if (!$IsInsert) {
+                $data = [
+                    'status' => false,
+                    'msg' => 'Restrição: ' . $$IsInsert,
+                    'id' => 0
+                ];
+                $payload = json_encode($data);
+                $response->getBody()->write($payload);
+                return $response
+                    ->withHeader('Content-Type', 'application/json')
+                    ->withStatus(200);
             }
-            echo json_encode(['status' => true, 'msg' => 'Removido com sucesso!', 'id' => $id]);
-            die;
-        } catch (\Throwable $th) {
-            echo "Erro: " . $th->getMessage();
-            die;
+
+            $id = SelectQuery::select('id')->from('usuario')->order('id', 'desc')->fetch();
+
+            $data = [
+                'status' => true,
+                'msg' => 'Cadastro realizado com sucesso! ',
+                'id' => $id['id']
+            ];
+            $payload = json_encode($data);
+            $response->getBody()->write($payload);
+            return $response
+                ->withHeader('Content-Type', 'application/json')
+                ->withStatus(200);
+        } catch (\Exception $e) {
+        }
+    }
+    public function update($request, $response)
+    {
+        try {
+            $form = $request->getParsedBody();
+            $id = $form['id'];
+            $FieldAndValues = [
+                'nome' => $form['nome'],
+                'sobrenome' => $form['sobrenome'],
+                'cpf' => $form['cpf'],
+                'rg' => $form['rg'],
+                'data_nascimento' => $form['data_nascimento'],
+                'senha' => password_hash($form['senha'], PASSWORD_DEFAULT),
+                #'ativo' => (isset($form['ativo']) and $form['ativo'] === 'true') ? true : false,
+                #'administrador' => (isset($form['administrador']) and $form['administrador'] === 'true') ? true : false
+            ];
+            $IsUpdate = UpdateQuery::table('usuario')->set($FieldAndValues)->where('id', '=', $id)->update();
+            if (!$IsUpdate) {
+                $data = [
+                    'status' => false,
+                    'msg' => 'Restrição: ' . $$IsUpdate,
+                    'id' => 0
+                ];
+                $payload = json_encode($data);
+                $response->getBody()->write($payload);
+                return $response
+                    ->withHeader('Content-Type', 'application/json')
+                    ->withStatus(200);
+            }
+            $data = [
+                'status' => true,
+                'msg' => 'Dados alterados com sucesso! ',
+                'id' => $id
+            ];
+            $payload = json_encode($data);
+            $response->getBody()->write($payload);
+            return $response
+                ->withHeader('Content-Type', 'application/json')
+                ->withStatus(200);
+        } catch (\Exception $e) {
         }
     }
 }

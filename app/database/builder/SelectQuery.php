@@ -42,7 +42,6 @@ class SelectQuery
         $this->order = " order by {$field}  {$typeOrder}";
         return $this;
     }
-
     public function limit(int $limit, int $offset = 0): self
     {
         $this->limit = $limit;
