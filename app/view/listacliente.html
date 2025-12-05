@@ -1,68 +1,77 @@
 {% extends "main.html" %}
 {% block main %}
 <div class="container">
-    <div class="row">
-        <div class="col-12">
-            <div class="card mt-2">
-                <div class="card-header">
-                    <h2>Lista de Cliente</h2>
-                    <a href="/cliente/cadastro" class="btn btn-success">Cadastrar</a>
-                </div>
-                <div class="card-body">
-                    <table class="table table-striped table-hover">
-                        <thead>
-                            <tr>
-                                <th><i class="fa-solid fa-address-card"></i>Nome</th>
-                                <th><i class="fa-solid fa-address-card"></i>Sobrenome</th>
-                                <th><i class="fa-solid fa-address-card"></i>CPF/CNPJ</th>
-                                <th><i class="fa-solid fa-address-card"></i>RG/IE</th>
-                                <th><i class="fa-solid fa-at"></i>E-Mail</th>
-                                <th><i class="fa-solid fa-address-card"></i>celular</th>
-                                <th><i class="fa-solid fa-ghost"></i>Ação</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Willian</td>
-                                <td>Pereira</td>
-                                <td>Pereira</td>
-                                <td>Pereira</td>
-                                <td>Pereira</td>
-                                <td>Pereira</td>
-                                <td>
-                                    <button type="button" class="btn btn-danger">
-                                        <i class="fa-solid fa-trash"></i>
-                                        Excluir
-                                    </button>
-                                    <button type="button" class="btn btn-warning">
-                                        <i class="fa-solid fa-pen"></i>
-                                        Editar
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Willian</td>
-                                <td>Pereira</td>
-                                <td>Pereira</td>
-                                <td>Pereira</td>
-                                <td>Pereira</td>
-                                <td>Pereira</td>
-                                <td>
-                                    <button type="button" class="btn btn-danger">
-                                        <i class="fa-solid fa-trash"></i>
-                                        Excluir
-                                    </button>
-                                    <button type="button" class="btn btn-warning">
-                                        <i class="fa-solid fa-pen"></i>
-                                        Editar
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+    <form id="form">
+        <div class="modal fade" id="editar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Editar Cadatro</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <form class="row g-3 needs-validation" id="form">
+                                <div class="col-md-4">
+                                    <label for="nome" class="form-label">Nome</label>
+                                    <input type="text" class="form-control" id="nome" name="nome"
+                                        placeholder="Digite seu nome." required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="sobrenome" class="form-label">Sobrenome</label>
+                                    <input type="text" class="form-control" id="sobrenome" name="sobrenome"
+                                        placeholder="Por favor digite seu sobre nome" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="cpf" class="form-label">CPF/CNPJ</label>
+                                    <input type="text" class="form-control" id="cpf" name="cpf"
+                                        placeholder="Por favor digite seu CPF ou CNPJ" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="rg" class="form-label">RG/IE</label>
+                                    <input type="text" class="form-control" id="rg" name="rg"
+                                        placeholder="Por favor digite seu RG ou Inscrição Estadual" required>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" type="button" id="insert">Salvar</button>
+                        <button type="button" id="Update" class="btn btn-sucess">Salvar</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+        <input type="hidden" id="id" name="id">
+        <div class="row">
+            <div class="col-12">
+                <div class="card mt-2">
+                    <div class="card-header">
+                        <h2>Lista de Cliente</h2>
+                        <a href="/cliente/cadastro" class="btn btn-success">Cadastrar</a>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped table-hover" id="tabela">
+                            <thead>
+                                <tr>
+                                    <th><i class="fa-solid fa-address-card"></i>Id</th>
+                                    <th><i class="fa-solid fa-address-card"></i>Nome</th>
+                                    <th><i class="fa-solid fa-address-card"></i>Sobrenome</th>
+                                    <th><i class="fa-solid fa-address-card"></i>CPF/CNPJ</th>
+                                    <th><i class="fa-solid fa-address-card"></i>RG/IE</th>
+                                    <th><i class="fa-solid fa-ghost"></i>Ação</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+    </form>
 </div>
+</div>
+{% endblock %}
+{% block script %}
+{% include "script.html" %}
+<script defer type="module" src="/js/listacliente.js"></script>
 {% endblock %}

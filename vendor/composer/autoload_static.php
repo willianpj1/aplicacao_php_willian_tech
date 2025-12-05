@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit2a4aa7dd4ddb86da09e7c7873127242d
+class ComposerStaticInitb40202d9f919b418510146e85dda6d8f
 {
     public static $files = array (
         '253c157292f75eb38082b5acb06f3f01' => __DIR__ . '/..' . '/nikic/fast-route/src/functions.php',
@@ -43,6 +43,7 @@ class ComposerStaticInit2a4aa7dd4ddb86da09e7c7873127242d
             'Psr\\Http\\Server\\' => 16,
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
+            'PHPMailer\\PHPMailer\\' => 20,
         ),
         'F' => 
         array (
@@ -102,6 +103,10 @@ class ComposerStaticInit2a4aa7dd4ddb86da09e7c7873127242d
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
         ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
+        ),
         'Fig\\Http\\Message\\' => 
         array (
             0 => __DIR__ . '/..' . '/fig/http-message-util/src',
@@ -134,6 +139,13 @@ class ComposerStaticInit2a4aa7dd4ddb86da09e7c7873127242d
         'FastRoute\\RouteParser\\Std' => __DIR__ . '/..' . '/nikic/fast-route/src/RouteParser/Std.php',
         'Fig\\Http\\Message\\RequestMethodInterface' => __DIR__ . '/..' . '/fig/http-message-util/src/RequestMethodInterface.php',
         'Fig\\Http\\Message\\StatusCodeInterface' => __DIR__ . '/..' . '/fig/http-message-util/src/StatusCodeInterface.php',
+        'PHPMailer\\PHPMailer\\DSNConfigurator' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/DSNConfigurator.php',
+        'PHPMailer\\PHPMailer\\Exception' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/Exception.php',
+        'PHPMailer\\PHPMailer\\OAuth' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/OAuth.php',
+        'PHPMailer\\PHPMailer\\OAuthTokenProvider' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/OAuthTokenProvider.php',
+        'PHPMailer\\PHPMailer\\PHPMailer' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/PHPMailer.php',
+        'PHPMailer\\PHPMailer\\POP3' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/POP3.php',
+        'PHPMailer\\PHPMailer\\SMTP' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/SMTP.php',
         'Psr\\Container\\ContainerExceptionInterface' => __DIR__ . '/..' . '/psr/container/src/ContainerExceptionInterface.php',
         'Psr\\Container\\ContainerInterface' => __DIR__ . '/..' . '/psr/container/src/ContainerInterface.php',
         'Psr\\Container\\NotFoundExceptionInterface' => __DIR__ . '/..' . '/psr/container/src/NotFoundExceptionInterface.php',
@@ -515,19 +527,26 @@ class ComposerStaticInit2a4aa7dd4ddb86da09e7c7873127242d
         'app\\controller\\Base' => __DIR__ . '/../..' . '/app/controller/Base.php',
         'app\\controller\\Cliente' => __DIR__ . '/../..' . '/app/controller/Cliente.php',
         'app\\controller\\Customer' => __DIR__ . '/../..' . '/app/controller/Customer.php',
+        'app\\controller\\Empresa' => __DIR__ . '/../..' . '/app/controller/Empresa.php',
+        'app\\controller\\Fornecedor' => __DIR__ . '/../..' . '/app/controller/Fornecedor.php',
         'app\\controller\\Home' => __DIR__ . '/../..' . '/app/controller/Home.php',
+        'app\\controller\\Login' => __DIR__ . '/../..' . '/app/controller/Login.php',
         'app\\controller\\User' => __DIR__ . '/../..' . '/app/controller/User.php',
         'app\\database\\Connection' => __DIR__ . '/../..' . '/app/database/Connection.php',
+        'app\\database\\builder\\DeleteQuery' => __DIR__ . '/../..' . '/app/database/builder/DeleteQuery.php',
         'app\\database\\builder\\InsertQuery' => __DIR__ . '/../..' . '/app/database/builder/InsertQuery.php',
+        'app\\database\\builder\\SelectQuery' => __DIR__ . '/../..' . '/app/database/builder/SelectQuery.php',
+        'app\\database\\builder\\UpdateQuery' => __DIR__ . '/../..' . '/app/database/builder/UpdateQuery.php',
+        'app\\middleware\\Middleware' => __DIR__ . '/../..' . '/app/middleware/Middleware.php',
         'app\\trait\\Template' => __DIR__ . '/../..' . '/app/trait/Template.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit2a4aa7dd4ddb86da09e7c7873127242d::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit2a4aa7dd4ddb86da09e7c7873127242d::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit2a4aa7dd4ddb86da09e7c7873127242d::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitb40202d9f919b418510146e85dda6d8f::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitb40202d9f919b418510146e85dda6d8f::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitb40202d9f919b418510146e85dda6d8f::$classMap;
 
         }, null, ClassLoader::class);
     }

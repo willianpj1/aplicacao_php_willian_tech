@@ -1,0 +1,56 @@
+{% extends "main.html" %}
+{% block main %}
+<div class="container mt-5">
+    <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-header bg-success text-white py-3 rounded-top-4">
+            <h3 class="m-0 fw-semibold">Cadastro de Empresa</h3>
+        </div>
+        <div class="card-body p-4">
+            <form class="row g-4" id="form">
+                <div class="col-md-4">
+                    <label for="nome" class="form-label fw-semibold">Nome</label>
+                    <input type="text" class="form-control form-control-lg rounded-3" 
+                           id="nome" name="nome" placeholder="Digite seu nome" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="sobrenome" class="form-label fw-semibold">Sobrenome</label>
+                    <input type="text" class="form-control form-control-lg rounded-3" 
+                           id="sobrenome" name="sobrenome" placeholder="Digite seu sobrenome" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="cpf" class="form-label fw-semibold">CPF / CNPJ</label>
+                    <input type="text" class="form-control form-control-lg rounded-3" 
+                           id="cpf" name="cpf" placeholder="Digite seu CPF ou CNPJ" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="rg" class="form-label fw-semibold">RG / IE</label>
+                    <input type="text" class="form-control form-control-lg rounded-3" 
+                           id="rg" name="rg" placeholder="Digite seu RG ou Inscrição Estadual" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="password" class="form-label fw-semibold">Senha</label>
+                    <input type="password" class="form-control form-control-lg rounded-3" 
+                           id="password" name="password" placeholder="Digite sua senha" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="tel" class="form-label fw-semibold">Contato</label>
+                    <input type="text" class="form-control form-control-lg rounded-3" 
+                           id="tel" name="tel" placeholder="Digite um número de contato" required>
+                </div>
+                <div class="col-12 mt-4 d-flex gap-3">
+                    <button class="btn btn-success btn-lg px-4" type="button" id="insert">
+                        Salvar
+                    </button>
+                    <a class="btn btn-danger btn-lg px-4" href="/empresa/lista">
+                        Voltar
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+    {% include "script.html" %}
+    <script type="module" src="/js/empresa.js"></script>
+{% endblock %}

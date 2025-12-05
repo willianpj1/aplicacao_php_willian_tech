@@ -3,69 +3,31 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <div class="card mt-2">
-                <div class="card-header">
-                    <h2>Lista de Usuários</h2>
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header bg-secondary text-white py-3 rounded-top-4">
+                    <h3 class="m-0 fw-semibold">Cadastro de Usuário</h3>
                     <a href="/usuario/cadastro" class="btn btn-success">Cadastrar</a>
                 </div>
                 <div class="card-body">
-                    <table class="table table-striped table-hover">
+                    <table class="table table-striped table-hover" id="tabela">
                         <thead>
                             <tr>
+                                <th><i class="fa-solid fa-address-card"></i>Id</th>
                                 <th><i class="fa-solid fa-address-card"></i>Nome</th>
                                 <th><i class="fa-solid fa-address-card"></i>Sobrenome</th>
                                 <th><i class="fa-solid fa-address-card"></i>CPF</th>
                                 <th><i class="fa-solid fa-address-card"></i>RG</th>
-                                <th><i class="fa-solid fa-at"></i>E-Mail</th>
-                                <th><i class="fa-solid fa-address-card"></i>celular</th>
-                                <th><i class="fa-solid fa-address-card"></i>senha</th>
                                 <th><i class="fa-solid fa-ghost"></i>Ação</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>Willian</td>
-                                <td>Pereira</td>
-                                <td>Pereira</td>
-                                <td>Pereira</td>
-                                <td>Pereira</td>
-                                <td>Pereira</td>
-                                <td>Pereira</td>
-                                <td>
-                                    <button type="button" class="btn btn-danger">
-                                        <i class="fa-solid fa-trash"></i>
-                                        Excluir
-                                    </button>
-                                    <button type="button" class="btn btn-warning">
-                                        <i class="fa-solid fa-pen"></i>
-                                        Editar
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Willian</td>
-                                <td>Pereira</td>
-                                <td>Pereira</td>
-                                <td>Pereira</td>
-                                <td>Pereira</td>
-                                <td>Pereira</td>
-                                <td>Pereira</td>
-                                <td>
-                                    <button type="button" class="btn btn-danger">
-                                        <i class="fa-solid fa-trash"></i>
-                                        Excluir
-                                    </button>
-                                    <button type="button" class="btn btn-warning">
-                                        <i class="fa-solid fa-pen"></i>
-                                        Editar
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
+{% endblock %}
+{% block script %}
+{% include "script.html" %}
+<script defer type="module" src="/js/listuser.js"></script>
 {% endblock %}

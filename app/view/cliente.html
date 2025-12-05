@@ -22,24 +22,14 @@
                 <input type="text" class="form-control" id="rg" name="rg"
                     placeholder="Por favor digite seu RG ou Inscrição Estadual" required>
             </div>
-            <div class="col-md-4">
-                <label for="email" class="form-label">E-mail</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Por favor digite E-mail"
-                    required>
-            </div>
-            <div class="col-md-4">
-                <label for="tel" class="form-label">Contato</label>
-                <input type="text" class="form-control" id="tel" name="tel" placeholder="Por favor digite numero para contato"
-                    required>
-            </div>
             <div class="col-12">
                 <button class="btn btn-primary" type="button" id="insert">Salvar</button>
+                <a class="btn btn-primary" href="/cliente/lista" type="button">voltar</a>
             </div>
         </form>
     </div>
 </div>
 {% endblock %}
-
 {% block script %}
 {% include "script.html" %}
 <script defer type="module" src="/js/cliente.js"></script>
