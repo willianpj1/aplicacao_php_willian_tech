@@ -537,6 +537,7 @@ class ComposerStaticInitb40202d9f919b418510146e85dda6d8f
         'app\\database\\builder\\InsertQuery' => __DIR__ . '/../..' . '/app/database/builder/InsertQuery.php',
         'app\\database\\builder\\SelectQuery' => __DIR__ . '/../..' . '/app/database/builder/SelectQuery.php',
         'app\\database\\builder\\UpdateQuery' => __DIR__ . '/../..' . '/app/database/builder/UpdateQuery.php',
+        'app\\middleware\\Middleware' => __DIR__ . '/../..' . '/app/middleware/Middleware.php',
         'app\\trait\\Template' => __DIR__ . '/../..' . '/app/trait/Template.php',
     );
 

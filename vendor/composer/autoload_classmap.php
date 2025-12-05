@@ -425,5 +425,6 @@ return array(
     'app\\database\\builder\\InsertQuery' => $baseDir . '/app/database/builder/InsertQuery.php',
     'app\\database\\builder\\SelectQuery' => $baseDir . '/app/database/builder/SelectQuery.php',
     'app\\database\\builder\\UpdateQuery' => $baseDir . '/app/database/builder/UpdateQuery.php',
+    'app\\middleware\\Middleware' => $baseDir . '/app/middleware/Middleware.php',
     'app\\trait\\Template' => $baseDir . '/app/trait/Template.php',
 );

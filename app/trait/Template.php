@@ -17,6 +17,14 @@ trait Template
             throw new \Exception("Restrição: " . $e->getMessage());
         }
     }
+    public function SendJson($response, $data, $status = 200)
+    {
+        $payload = json_encode($data);
+        $response->getBody()->write($payload);
+        return $response
+            ->withHeader('Content-Type', 'application/json')
+            ->withStatus($status);
+    }
     public function setView($name)
     {
         return $name . EXT_VIEW;

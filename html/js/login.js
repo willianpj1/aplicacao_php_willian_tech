@@ -2,7 +2,6 @@ import { Validate } from "./Validate.js";
 import { Requests } from "./Requests.js";
 
 const preCadastro = document.getElementById('preCadastro');
-
 const Login = document.getElementById('Login');
 
 $('#cpf').inputmask({ "mask": ["999.999.999-99"] });

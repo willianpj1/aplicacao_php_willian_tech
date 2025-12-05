@@ -1,10 +1,5 @@
 <?php
 session_start();
-$_SESSION['usuario']=[
-    'nome'=>'Administrador',
-    'cpf'=>'000.000.000-00',
-
-];
 #Diretorio raiz da applicação WEB
 define('ROOT', dirname(__FILE__, 3));
 #Extensão padrão da camada de interação com usuário front-end.

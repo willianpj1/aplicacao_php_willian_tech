@@ -23,7 +23,7 @@
                 <label for="senha">Informe sua senha de acesso *</label>
             </div>
             <div class="d-flex gap-2 mb-4">
-                <button type="submit" class="btn btn-primary flex-fill">Entrar</button>
+                <button id="Login" type="button" class="btn btn-primary flex-fill">Entrar</button>
             </div>
             <div class="d-flex gap-2">
                 <button class="btn btn-outline-secondary flex-fill" type="button" data-bs-toggle="modal"
@@ -124,18 +124,14 @@
     </form>
     <style>
         body {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: center;
-
-            background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab') center/cover no-repeat;
-
-            backdrop-filter: blur(4px);
-            font-family: "Inter", "Segoe UI", sans-serif;
-            margin: 0;
+            align-items: flex-start;
+            /* ← Mude isso */
+            padding-top: 60px;
+            /* ← Pode ajustar */
         }
-
         .login-container {
             width: 420px;
             padding: 40px 35px;
