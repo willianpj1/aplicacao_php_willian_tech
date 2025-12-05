@@ -17,7 +17,6 @@ Salvar.addEventListener('click', async () => {
         });
         return
     }
-
     Swal.fire({
         title: "Cadastro realizado com sucesso!",
         icon: "success",
