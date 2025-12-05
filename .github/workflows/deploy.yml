@@ -30,5 +30,6 @@ jobs:
           script: |
             cd /home/willian
             dos2unix runproject.sh
-            chmod +x runproject.sh            
+            chmod +x runproject.sh  
+            sudo bash runproject.sh          
             chown -R www-data:www-data .
